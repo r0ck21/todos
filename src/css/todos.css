@@ -1,0 +1,107 @@
+.container {
+  height: 1000px;
+  font-weight: lighter;
+}
+
+.title {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  color: #c24c34;
+  opacity: 0.3;
+  font-size: 66px;
+}
+
+.task-input {
+  height: 66px;
+  font-family: "Segoe UI", "FontAwesome";
+  font-weight: lighter;
+  font-size: 22px;
+  opacity: 0.3;
+}
+
+.main {
+  background: #fff;
+  box-shadow:
+          /* The top layer shadow */ 0 1px 1px rgba(0, 0, 0, 0.15),
+    /* The second layer */ 0 10px 0 -5px #eee,
+    /* The second layer shadow */ 0 10px 1px -4px rgba(0, 0, 0, 0.15),
+    /* The third layer */ 0 20px 0 -10px #eee,
+    /* The third layer shadow */ 0 20px 1px -9px rgba(0, 0, 0, 0.15);
+}
+
+.todo-options {
+  display: flex;
+}
+
+.todo-options p {
+  flex: 2;
+  padding-top: 5px;
+}
+
+.container-buttons {
+  flex: 3;
+}
+
+.todo-options button {
+  margin-right: 5px;
+}
+
+/* Customize the label (the container) */
+.checkbox-label {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.checkbox-label input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 5px;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: white;
+  border: solid 1px grey;
+  border-radius: 50%;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.checkbox-label input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.checkbox-label .checkmark:after {
+  left: 7px;
+  top: 2px;
+  width: 8px;
+  height: 15px;
+  border: solid green;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
