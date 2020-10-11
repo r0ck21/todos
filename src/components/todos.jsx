@@ -1,12 +1,18 @@
 import React, { Component } from "react";
 import { getTodos } from "../services/fakeTodoService";
 import uuid from "react-uuid";
+import Todo from './todo';
+import TodoForm from './todoForm';
+
+const buttonAll = "all";
+const buttonActive = "active";
+const buttonCompleted = "completed";
 
 class Todos extends Component {
   state = {
     todos: [],
     count: 0,
-    selectedButton: "all"
+    selectedButton: buttonAll
   };
 
   componentDidMount() {
@@ -45,13 +51,12 @@ class Todos extends Component {
   }
 
   filterTodos = () => { 
-    if(this.state.selectedButton === "active"){
+    if(this.state.selectedButton === buttonActive){
       return this.state.todos.filter( todo => !todo.completed);
-    }else if(this.state.selectedButton === "completed"){
+    }else if(this.state.selectedButton === buttonCompleted){
       return this.state.todos.filter( todo => todo.completed);
-    }else{
+    }
       return this.state.todos;
-    } 
   }
 
 
@@ -63,49 +68,25 @@ class Todos extends Component {
       <div className="container">
         <p className="title">todos</p>
         <div className="main">
-          <form onKeyPress={this.handleKeyPress}>
-            <input
-              type="text"
-              className="form-control task-input"
-              placeholder="&#xf078;  What needs to be done?"
-            />
-          </form>
+        <TodoForm keyPress={this.handleKeyPress}/>
           <ul className="list-group">
-            {filtered.map((todo) => (
-              <li key={todo._id} className="list-group-item">
-                <label
-                  className="checkbox-label"
-                  style={{
-                    textDecoration: todo.completed ? "line-through" : null,
-                    opacity: todo.completed ? 0.3 : null,
-                  }}
-                >
-                  {todo.task}
-                  <input
-                    type="checkbox"
-                    id={todo._id}
-                    defaultChecked={todo.completed}
-                    onClick={() => this.handleCheckboxSelect(todo)}
-                  />
-                  <span className="checkmark"></span>
-                </label>
-              </li>
-            ))}
+            {filtered.map((todo) => ( <Todo key={todo._id} todo={todo} handleCheckbox={this.handleCheckboxSelect}/>))}
 
             <li className="list-group-item todo-options">
               <p>{this.state.count} items left </p>
               <div className="container-buttons">
-                <button type="button" className={this.state.selectedButton === "all" ? "btn btn-light active" : "btn btn-light"}  onClick={() => this.handleButtonSelect("all")}>
+                <button type="button" className={this.state.selectedButton === buttonAll ? "btn btn-light active" : "btn btn-light"}  onClick={() => this.handleButtonSelect(buttonAll)}>
                   All
                 </button>
-                <button type="button" className={this.state.selectedButton === "active" ? "btn btn-light active" : "btn btn-light"} onClick={() => this.handleButtonSelect("active")}>
+                <button type="button" className={this.state.selectedButton === buttonActive ? "btn btn-light active" : "btn btn-light"} onClick={() => this.handleButtonSelect(buttonActive)}>
                   Active
                 </button>
-                <button type="button" className={this.state.selectedButton === "completed" ? "btn btn-light active" : "btn btn-light"} onClick={() => this.handleButtonSelect("completed")}>
+                <button type="button" className={this.state.selectedButton === buttonCompleted ? "btn btn-light active" : "btn btn-light"} onClick={() => this.handleButtonSelect(buttonCompleted)}>
                   Completed
                 </button>
               </div>
             </li>
+            
           </ul>
         </div>
       </div>
